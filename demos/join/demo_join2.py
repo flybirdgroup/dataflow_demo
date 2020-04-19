@@ -2,7 +2,7 @@ import apache_beam as beam
 import argparse
 from apache_beam.options.pipeline_options import PipelineOptions, SetupOptions, GoogleCloudOptions
 
-from examples.join.join import Join
+from demos.join.join import Join
 import random
 from apache_beam.io.avroio import WriteToAvro
 try:
@@ -12,6 +12,7 @@ except ImportError:
 
 from fastavro import parse_schema
 import json
+import logging
 
 def printfn(elem):
     print(elem)
@@ -137,4 +138,5 @@ def run(argv=None):
     # result.wait_until_finish()
 
 if __name__ == '__main__':
+    logging.getLogger().setLevel(logging.DEBUG)
     run()
