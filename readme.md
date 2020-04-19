@@ -155,10 +155,25 @@ python examples/join/two_gcs_inputs.py  \
     --service-accountn-email=appdevops-sa@mvp-project-273913.iam.gserviceaccount.com \
 
 
+git clone https://github.com/yeahydq/dataflow_demo.git
+cd dataflow_demo
+export PYTHONPATH=`pwd`
+python3 demos/join/demo_join2.py \
+--setup_file ./setup.py \
+--records 1000 \
+--output /tmp/dataflow/demo/output \
+--runner DirectRunner
 
-gcloud beta dataflow jobs run JOB_NAME --gcs-location=GCS_LOCATION [--dataflow-kms-key=DATAFLOW_KMS_KEY] [--disable-public-ips] [--max-workers=MAX_WORKERS] [--network=NETWORK] [--num-workers=NUM_WORKERS] [--parameters=[PARAMETERS,…]] [--region=REGION_ID] [--service-account-email=SERVICE_ACCOUNT_EMAIL] [--staging-location=STAGING_LOCATION] [--subnetwork=SUBNETWORK] [--worker-machine-type=WORKER_MACHINE_TYPE] [--worker-region=WORKER_REGION     | --worker-zone=WORKER_ZONE     | --zone=ZONE] [GCLOUD_WIDE_FLAG …]
+export GOOGLE_APPLICATION_CREDENTIALS=~/gcp.json
+python3 demos/join/demo_join2.py  \
+--setup_file ./setup.py \
+--project mvp-project-273913 --records 1000 \
+--output gs://dy-awesome-bucket/demo/outputs \
+--temp_location gs://dy-awesome-bucket/tmp/ \
+--runner DataflowRunner
 
 
-gcloud beta dataflow jobs run workCount \
- --gcs-location=gs://$BUCKET/ [--dataflow-kms-key=DATAFLOW_KMS_KEY] [--disable-public-ips] [--max-workers=MAX_WORKERS] [--network=NETWORK] [--num-workers=NUM_WORKERS] [--parameters=[PARAMETERS,…]] [--region=REGION_ID] [--service-account-email=SERVICE_ACCOUNT_EMAIL] [--staging-location=STAGING_LOCATION] [--subnetwork=SUBNETWORK] [--worker-machine-type=WORKER_MACHINE_TYPE] [--worker-region=WORKER_REGION     | --worker-zone=WORKER_ZONE     | --zone=ZONE] [GCLOUD_WIDE_FLAG …]
-```
+
+Record | mac | vm | dataflow
+-------|-----|----|---------
+1000 | 0.11 | |

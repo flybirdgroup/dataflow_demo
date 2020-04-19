@@ -138,5 +138,5 @@ def run(argv=None):
     # result.wait_until_finish()
 
 if __name__ == '__main__':
-    # logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(logging.INFO)
     run()
